@@ -29,6 +29,8 @@
         {% endif %}
         </tbody>
     </table>
+    <!-- 질문 등록 버튼, pybo:question_create 별칭에 해당하는 url 매핑 추가해야함 -->
+    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
 </div>
 
 {% endblock %}
