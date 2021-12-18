@@ -1,24 +1,37 @@
-{% load static %}   <!-- 스타일시트 가져와 적용하기 -->
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-<h1>{{ question.subject }}</h1> <!-- question.subject과 question.content의 question은 detail 함수에서 context로 넘겨받은 데이터 -->
+{% load static %}   <!-- 부트스트랩 가져와 적용하기! -->
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
 
-<div>
-    {{ question.content }}
-</div>
-
-<!-- 답변 조회 폼 -->
-<h5>{{ question.answer_set.count }}개의 답변이 있습니다.</h5>    <!-- question.answer_set.count는 답변의 총 갯수를 의미 -->
-<div>
-    <ul>
+<!-- 부트스트랩 코드 -->
+<div class="container my-3">
+    <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ question.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 class="border-bottom my-3 py-2">{{question.answer_set.count}}개의 답변이 있습니다.</h5>
     {% for answer in question.answer_set.all %}
-        <li>{{ answer.content }}</li>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ answer.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-    </ul>
+    <form action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
+        {% csrf_token %}
+        <div class="form-group">
+            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="답변등록" class="btn btn-primary">
+    </form>
 </div>
-
-<!-- 답변 저장(등록) 폼 -->
-<form action="{% url 'pybo:answer_create' question.id %}" method="post"> <!-- '해결'pybo:answer_create 별칭은 안 만들어놨기때문에 urls에서 만들어줘야함 -->
-{% csrf_token %} <!-- 보안을 위한 태그로 form태그 바로 밑에 써주면 됨 -->
-<textarea name="content" id="content" rows="15"></textarea>
-<input type="submit" value="답변등록">
-</form>
