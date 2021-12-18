@@ -1,3 +1,5 @@
+{% load static %}   <!-- 스타일시트 가져와 적용하기 -->
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <h1>{{ question.subject }}</h1> <!-- question.subject과 question.content의 question은 detail 함수에서 context로 넘겨받은 데이터 -->
 
 <div>
