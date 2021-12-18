@@ -1,5 +1,5 @@
-{% load static %}   <!-- 부트스트랩 가져와 적용하기! -->
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+{% extends 'base.html' %}   <!-- base를 상속받음 -->
+{% block content %}
 
 <!-- 부트스트랩 코드 -->
 <div class="container my-3">
@@ -35,3 +35,5 @@
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
 </div>
+
+{% endblock %}
