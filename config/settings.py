@@ -3,7 +3,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -15,11 +14,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'pybo.apps.PyboConfig',
+    'common.apps.CommonConfig',  # # 앱을 만들면 등록!
+    'pybo.apps.PyboConfig',  # 앱을 만들면 등록, 안하면 기능을 못함
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +42,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],   # templates 디렉터리 만들거니까 등록!
+        'DIRS': [BASE_DIR / 'templates'],  # templates 디렉터리 만들거니까 등록!
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,24 +57,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysite3', # DB명
-        'USER': 'root', # DBMS 접속 아이디
-        'PASSWORD': '', # DBMS 접속 비번
-        'HOST': '127.0.0.1', # DBMS 주소
-        'PORT': '3306', # DBMS 포트
-        'OPTIONS': { # WARNING에 뜬 url로 들어가 제시하는 코드를 복붙해서 넣은 것
+        'NAME': 'mysite3',  # DB명
+        'USER': 'root',  # DBMS 접속 아이디
+        'PASSWORD': '',  # DBMS 접속 비번
+        'HOST': '127.0.0.1',  # DBMS 주소
+        'PORT': '3306',  # DBMS 포트
+        'OPTIONS': {  # WARNING에 뜬 url로 들어가 제시하는 코드를 복붙해서 넣은 것
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -95,7 +92,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -109,16 +105,21 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',    # static 디렉터리 만들거니까 등록해주기!
+    BASE_DIR / 'static',  # static 디렉터리 만들거니까 등록해주기!
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 로그인 성공 후 이동 하는 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃 시 이동 하는 URL
+LOGOUT_REDIRECT_URL = '/'
