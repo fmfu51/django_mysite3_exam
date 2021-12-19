@@ -20,7 +20,6 @@
                 <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
                 {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
             </td>
-            <td>{{ forloop.counter }}</td>
             <td>
                 <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
             </td>
@@ -49,15 +48,15 @@
         <!-- 페이지리스트 -->
         {% for page_number in question_list.paginator.page_range %}
         {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
-            {% if page_number == question_list.number %}
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-            </li>
-            {% else %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-            </li>
-            {% endif %}
+        {% if page_number == question_list.number %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
         {% endif %}
         {% endfor %}
         <!-- 다음페이지 -->
