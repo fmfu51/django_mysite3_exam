@@ -20,3 +20,12 @@ class Answer(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)  # null=True, blank=True는 어떤 조건으로든 값을 비워둘 수 있음
+
+
+class Comment(models.Model):    # 댓글 모델
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # 글쓴이
+    content = models.TextField()    # 내용
+    create_date = models.DateTimeField()    # 작성 일시
+    modify_date = models.DateTimeField(null=True, blank=True)   # 수정 일시
+    question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE) # 이 댓글이 달린 질문
+    answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)  # 이 댓글이 달린 답변
